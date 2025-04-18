@@ -1,17 +1,27 @@
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   className?: string;
   onClick?: () => void;
-  variant?: "primary"
+  variant?: 'primary';
 }
 
 const buttonVariants = {
-  primary: "bg-primary text-white hover:bg-primary-hover",
+  primary: 'bg-primary text-white hover:bg-primary-hover',
 };
 
-const Button: React.FC<ButtonProps> = ({ children, className, onClick, variant = "primary" }) => {
+const Button: React.FC<ButtonProps> = ({
+  children,
+  className,
+  onClick,
+  variant = 'primary',
+  ...props
+}) => {
   return (
-    <button className={`${className} cursor-pointer font-dahab  text-white font-bold bg-primary shadow-[0_3px_0_0_var(--color-border)] active:shadow-none transition-all duration-100 hover:bg-primary-hover -translate-y-[3px] active:translate-y-0 rounded-md px-4 py-2 pt-3`} onClick={onClick}>
+    <button
+      className={`${className} font-dahab bg-primary hover:bg-primary-hover -translate-y-[3px] cursor-pointer rounded-md px-4 py-2 pt-3 font-bold text-white shadow-[0_3px_0_0_var(--color-border)] transition-all duration-100 select-none active:translate-y-0 active:shadow-none`}
+      onClick={onClick}
+      {...props}
+    >
       {children}
     </button>
   );
